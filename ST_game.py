@@ -4,7 +4,7 @@ from functions import find_similar_embedding_ST
 from sentence_transformers import SentenceTransformer
 
 
-# Load embedding model
+# Loading embedding model
 ST_embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
 
 # loading words and embeddings
@@ -14,16 +14,15 @@ embeddings = np.load("word_list/embeddings_ST.npy")
 # Initialize Pygame
 pygame.init()
 
-# Screen dimensions
+# dimensions and colors
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
-# Colors
 GREY = (230, 230, 230)
 RED = (232, 93, 93)
 BLACK = (0, 0, 0)
 
-# Set up the screen
+# screen
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Craft game - SentenceTransformer")
 
@@ -33,7 +32,7 @@ font_message = pygame.font.Font(None, 24)
 font_inventory = pygame.font.Font(None, 20)
 font_reset = pygame.font.Font(None, 18)
 
-# Initial inventory
+# dimensions for inventory elements
 inventory = ["water", "wind", "earth", "fire"]
 selected_boxes = [None, None]
 message = ""
@@ -46,14 +45,12 @@ BOX_HEIGHT = 30
 scroll_offset = 0
 SCROLL_STEP = 10
 
-# Function to draw a box
+# Function to draw box for elements
 def draw_box(surface, text, x, y, color=BLACK):
     pygame.draw.rect(surface, color, (x, y, BOX_WIDTH, BOX_HEIGHT), 2)
     text_surface = font_inventory.render(text, True, BLACK)
     text_rect = text_surface.get_rect(center=(x + BOX_WIDTH // 2, y + BOX_HEIGHT // 2))
     surface.blit(text_surface, text_rect)
-
-
 
 
 # Main loop
@@ -67,7 +64,7 @@ while running:
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = event.pos
 
-            # Check for clicks on inventory boxes
+
             for i, item in enumerate(inventory):
                 box_x = SCREEN_WIDTH - 150
                 box_y = 50 + i * (BOX_HEIGHT + 10) - scroll_offset
@@ -78,7 +75,7 @@ while running:
                     elif selected_boxes[1] is None:
                         selected_boxes[1] = item
 
-            # Combine strings if both boxes are selected
+            # Activates sentenceTransformer function if two elements are selected
             if selected_boxes[0] and selected_boxes[1]:
                 new_box = find_similar_embedding_ST(selected_boxes[0], selected_boxes[1], embedded_words, embeddings,
                                                     ST_embedding_model)
@@ -89,47 +86,48 @@ while running:
                 message = f"By combining {selected_boxes[0]} and {selected_boxes[1]} you created {new_box}"
                 selected_boxes = [None, None]
 
-
+        # reset inventory
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_r:
-                inventory = ["water", "wind", "earth", "fire"]  # Reset inventory to initial state
-                selected_boxes = [None, None]  # Clear selected boxes
-                message = ""  # Clear message
+                inventory = ["water", "wind", "earth", "fire"]
+                selected_boxes = [None, None]
+                message = ""
 
+        # Scrolling
         if event.type == pygame.MOUSEWHEEL:
             scroll_offset += event.y * SCROLL_STEP
-            scroll_offset = max(0, scroll_offset)  # Prevent scrolling above the top
+            scroll_offset = max(0, scroll_offset)
 
-    # Clear the screen
+
     screen.fill(GREY)
 
-    # Draw main text
+    # Main text
     main_text = font.render("Combine elements from your inventory", True, BLACK)
     screen.blit(main_text, (90, 50))
     reset_text = font_reset.render("press [r] to reset inventory", True, BLACK)
     screen.blit(reset_text, (450, 580))
+    inventory_text = font.render("Inventory", True, BLACK)
+    screen.blit(inventory_text, (SCREEN_WIDTH - 150 + 10, 10))
 
-    # Draw selected boxes
+    # Draw selected elements
     if selected_boxes[0]:
         draw_box(screen, selected_boxes[0], 300, 200)
     if selected_boxes[1]:
         draw_box(screen, selected_boxes[1], 400, 150)
 
-    # Draw inventory background
+    #  inventory background
     pygame.draw.rect(screen, RED, (SCREEN_WIDTH - 150, 0, 150, SCREEN_HEIGHT))
 
-    # Draw inventory title
-    inventory_text = font.render("Inventory", True, BLACK)
-    screen.blit(inventory_text, (SCREEN_WIDTH - 150 + 10, 10))
 
-    # Draw inventory boxes with scroll offset
+
+    # Scrolling
     for i, item in enumerate(inventory):
         box_x = SCREEN_WIDTH - 150 + 10
         box_y = 50 + i * (BOX_HEIGHT + 10) - scroll_offset
         if 0 <= box_y < SCREEN_HEIGHT:  # Only draw visible boxes
             draw_box(screen, item, box_x, box_y)
 
-    # Draw message
+    # Message when combining elements
     if message:
         message_surface = font_message.render(message, True, BLACK)
         screen.blit(message_surface, (100, 350))
@@ -137,7 +135,6 @@ while running:
     # Update the display
     pygame.display.flip()
 
-    # Cap the frame rate
     clock.tick(60)
 
 # Quit Pygame

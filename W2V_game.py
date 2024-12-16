@@ -4,27 +4,21 @@ import kagglehub
 from gensim.models import KeyedVectors
 from functions import find_similar_embedding_W2V
 
-
 # Load the pre-trained Word2Vec model
 
 # BE AWARE THAT THIS DOWNLOADS THE GoogleNews-vectors-negative300 MODEL WHICH TAKES UP 3.64 GB
-# After the models is downloaded, the path should be changed to the local path
-#path = kagglehub.dataset_download("leadbest/googlenewsvectorsnegative300")
+# If problem arises, the model can be downloaded manually from: https://www.kaggle.com/datasets/leadbest/googlenewsvectorsnegative300
 
-
-### remove ###
-path = "/Users/filipwillesen/Desktop/GoogleNews-vectors-negative300.bin"
-
+path = kagglehub.dataset_download("leadbest/googlenewsvectorsnegative300")
 print(path)
+
 
 W2V_embedding = KeyedVectors.load_word2vec_format(path, binary=True)
 
 
 # loading words and embeddings
-
 embedded_words = np.load("word_list/embedded_words_W2V.npy")
 embeddings = np.load("word_list/embeddings_W2V.npy")
-
 
 # Initialize Pygame
 pygame.init()
@@ -60,7 +54,7 @@ BOX_HEIGHT = 30
 SCROLL_OFFSET = 0
 SCROLL_STEP = 10
 
-# Function to draw a box
+# Function to draw box for elements
 def draw_box(surface, text, x, y, color=BLACK):
     pygame.draw.rect(surface, color, (x, y, BOX_WIDTH, BOX_HEIGHT), 2)
     text_surface = font_inventory.render(text, True, BLACK)
@@ -80,18 +74,18 @@ while running:
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = event.pos
 
-            # Check for clicks on inventory boxes
+
             for i, item in enumerate(inventory):
                 box_x = SCREEN_WIDTH - 150
                 box_y = 50 + i * (BOX_HEIGHT + 10) - SCROLL_OFFSET
                 if box_x <= mouse_x <= box_x + BOX_WIDTH and box_y <= mouse_y <= box_y + BOX_HEIGHT:
-                    # Add the selected box to the left or right side
+
                     if selected_boxes[0] is None:
                         selected_boxes[0] = item
                     elif selected_boxes[1] is None:
                         selected_boxes[1] = item
 
-            # Combine strings if both boxes are selected
+            # Activates W2V function if two elements are selected
             if selected_boxes[0] and selected_boxes[1]:
                 new_box = find_similar_embedding_W2V(selected_boxes[0], selected_boxes[1], embedded_words, embeddings, W2V_embedding)
 
@@ -100,47 +94,46 @@ while running:
                 message = f"By combining {selected_boxes[0]} and {selected_boxes[1]} you created {new_box}"
                 selected_boxes = [None, None]
 
-
+        #reset inventory
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_r:
-                inventory = ["water", "wind", "earth", "fire"]  # Reset inventory to initial state
-                selected_boxes = [None, None]  # Clear selected boxes
-                message = ""  # Clear message
+                inventory = ["water", "wind", "earth", "fire"]
+                selected_boxes = [None, None]
+                message = ""
 
+        # Scrolling
         if event.type == pygame.MOUSEWHEEL:
             SCROLL_OFFSET += event.y * SCROLL_STEP
-            SCROLL_OFFSET = max(0, SCROLL_OFFSET)  # Prevent scrolling above the top
+            SCROLL_OFFSET = max(0, SCROLL_OFFSET)
 
-    # Clear the screen
+
     screen.fill(GREY)
 
-    # Draw main text
+    #Main text
     main_text = font.render("Combine elements from your inventory", True, BLACK)
     screen.blit(main_text, (90, 50))
     reset_text = font_reset.render("press [r] to reset inventory", True, BLACK)
     screen.blit(reset_text, (450, 580))
+    inventory_text = font.render("Inventory", True, BLACK)
+    screen.blit(inventory_text, (SCREEN_WIDTH - 150 + 10, 10))
 
-    # Draw selected boxes
+    # Draw selected elements
     if selected_boxes[0]:
         draw_box(screen, selected_boxes[0], 300, 200)
     if selected_boxes[1]:
         draw_box(screen, selected_boxes[1], 400, 150)
 
-    # Draw inventory background
+    # inventory background
     pygame.draw.rect(screen, RED, (SCREEN_WIDTH - 150, 0, 150, SCREEN_HEIGHT))
 
-    # Draw inventory title
-    inventory_text = font.render("Inventory", True, BLACK)
-    screen.blit(inventory_text, (SCREEN_WIDTH - 150 + 10, 10))
-
-    # Draw inventory boxes with scroll offset
+    # Scrolling
     for i, item in enumerate(inventory):
         box_x = SCREEN_WIDTH - 150 + 10
         box_y = 50 + i * (BOX_HEIGHT + 10) - SCROLL_OFFSET
-        if 0 <= box_y < SCREEN_HEIGHT:  # Only draw visible boxes
+        if 0 <= box_y < SCREEN_HEIGHT:
             draw_box(screen, item, box_x, box_y)
 
-    # Draw message
+    # Message when combining elements
     if message:
         message_surface = font_message.render(message, True, BLACK)
         screen.blit(message_surface, (100, 350))
@@ -148,8 +141,6 @@ while running:
     # Update the display
     pygame.display.flip()
 
-    # Cap the frame rate
     clock.tick(60)
 
-# Quit Pygame
 pygame.quit()
