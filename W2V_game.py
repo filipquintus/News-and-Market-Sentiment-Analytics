@@ -1,19 +1,14 @@
 import pygame
 import numpy as np
+import kagglehub
 from gensim.models import KeyedVectors
-from sklearn.metrics.pairwise import cosine_similarity
 from functions import find_similar_embedding_W2V
-from sentence_transformers import SentenceTransformer
-import pandas as pd
 
 
 # Load large Word2Vec model:
 # Define the path to the Word2Vec binary file
+path = kagglehub.dataset_download("leadbest/googlenewsvectorsnegative300")
 
-## path = kagglehub.dataset_download("leadbest/googlenewsvectorsnegative300")
-### untag when submitting ##
-
-path = "/Users/filipwillesen/.cache/kagglehub/datasets/leadbest/googlenewsvectorsnegative300/versions/2/GoogleNews-vectors-negative300.bin"
 # Load the pre-trained Word2Vec model
 W2V_embedding = KeyedVectors.load_word2vec_format(path, binary=True)
 

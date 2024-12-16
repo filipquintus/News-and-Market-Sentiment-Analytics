@@ -1,6 +1,4 @@
-import pygame
 import numpy as np
-from gensim.models import KeyedVectors
 from sklearn.metrics.pairwise import cosine_similarity
 
 

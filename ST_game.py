@@ -1,15 +1,11 @@
 import pygame
 import numpy as np
-from gensim.models import KeyedVectors
-from sklearn.metrics.pairwise import cosine_similarity
 from functions import find_similar_embedding_ST
 from sentence_transformers import SentenceTransformer
-import pandas as pd
 
 
 # Load embedding model
 ST_embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
-# Load large Word2Vec model:
 
 # loading words and embeddings
 embedded_words = np.load("word_list/embedded_words_ST.npy")
