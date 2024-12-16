@@ -36,6 +36,17 @@ This project contains two interactive games, **ST_Game** and **W2V_Game**, that 
   - `GoogleNews-vectors-negative300.bin`
 
 ---
+## Prerequisites
+
+1. **Python Version**: Ensure Python 3.8 or later is installed.
+2. **Dependencies**:
+   Install the required Python packages using pip:
+   ```bash
+   pip install pygame gensim scikit-learn sentence-transformers numpy
+   ```
+3. **Data Files**: Ensure all .npy embedding files are in the same directory as the scripts.
+Update the path variable in W2V_game.py to point to the GoogleNews-vectors-negative300.bin file.
+---
 
 ## Game Descriptions
 
@@ -55,13 +66,4 @@ This project contains two interactive games, **ST_Game** and **W2V_Game**, that 
 
 ---
 
-## Prerequisites
 
-1. **Python Version**: Ensure Python 3.8 or later is installed.
-2. **Dependencies**:
-   Install the required Python packages using pip:
-   ```bash
-   pip install pygame gensim scikit-learn sentence-transformers numpy
-   ```
-3. **Data Files**: Ensure all .npy embedding files are in the same directory as the scripts.
-Update the path variable in W2V_game.py to point to the GoogleNews-vectors-negative300.bin file.
