@@ -5,11 +5,18 @@ from gensim.models import KeyedVectors
 from functions import find_similar_embedding_W2V
 
 
-# Load large Word2Vec model:
-# Define the path to the Word2Vec binary file
-path = kagglehub.dataset_download("leadbest/googlenewsvectorsnegative300")
-
 # Load the pre-trained Word2Vec model
+
+# BE AWARE THAT THIS DOWNLOADS THE GoogleNews-vectors-negative300 MODEL WHICH TAKES UP 3.64 GB
+# After the models is downloaded, the path should be changed to the local path
+#path = kagglehub.dataset_download("leadbest/googlenewsvectorsnegative300")
+
+
+### remove ###
+path = "/Users/filipwillesen/Desktop/GoogleNews-vectors-negative300.bin"
+
+print(path)
+
 W2V_embedding = KeyedVectors.load_word2vec_format(path, binary=True)
 
 
@@ -22,16 +29,15 @@ embeddings = np.load("word_list/embeddings_W2V.npy")
 # Initialize Pygame
 pygame.init()
 
-# Screen dimensions
+# dimensions and colors
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
-# Colors
 GREY = (230, 230, 230)
 RED = (232, 93, 93)
 BLACK = (0, 0, 0)
 
-# Set up the screen
+# Screen
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Craft game - Word2Vec")
 
@@ -46,7 +52,7 @@ inventory = ["water", "wind", "earth", "fire"]
 selected_boxes = [None, None]
 message = ""
 
-# Box dimensions
+# dimensions for inventory elements
 BOX_WIDTH = 100
 BOX_HEIGHT = 30
 
