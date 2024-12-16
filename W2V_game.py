@@ -20,8 +20,8 @@ W2V_embedding = KeyedVectors.load_word2vec_format(path, binary=True)
 
 # loading words and embeddings
 
-embedded_words = np.load("embedded_words_W2V.npy")
-embeddings = np.load("embeddings_W2V.npy")
+embedded_words = np.load("word_list/embedded_words_W2V.npy")
+embeddings = np.load("word_list/embeddings_W2V.npy")
 
 
 # Initialize Pygame

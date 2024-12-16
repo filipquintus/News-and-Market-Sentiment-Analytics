@@ -12,8 +12,8 @@ ST_embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
 # Load large Word2Vec model:
 
 # loading words and embeddings
-embedded_words = np.load("embedded_words_ST.npy")
-embeddings = np.load("embeddings_ST.npy")
+embedded_words = np.load("word_list/embedded_words_ST.npy")
+embeddings = np.load("word_list/embeddings_ST.npy")
 
 # Initialize Pygame
 pygame.init()
