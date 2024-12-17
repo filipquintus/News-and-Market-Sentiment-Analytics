@@ -1,6 +1,6 @@
 ## **News and Market Sentiment Analysis - Exam**
 
-This project contains two version of a crafting game as a part of the exam in the course *DS821: News and Market Sentiment Analytics*:
+This project contains two version of a crafting game as a part of the exam for the course *DS821: News and Market Sentiment Analytics*:
  - **W2V_game** which is build on a Word2Vec-model
  - **ST_game** which is build on a SentenceTransformer-model.
 
@@ -18,7 +18,7 @@ This project contains two version of a crafting game as a part of the exam in th
 
 **Word2Vec Model**:
     
-   - The `GoogleNews-vectors-negative300.bin` file is required for the **W2V_Game**. When running the scrip for the **W2V_game**, the model is automaticly downloaded using the following:
+   - The `GoogleNews-vectors-negative300.bin` file is required for the **W2V_game**. When running the scrip for the **W2V_game**, the model is automaticly downloaded using the following:
      ```python
      import kagglehub
      path = kagglehub.dataset_download("leadbest/googlenewsvectorsnegative300")
