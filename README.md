@@ -9,13 +9,13 @@ This project contains two version of a crafting game:
 ## **Prerequisites**
 
 
-1**Dependencies**:
+**Dependencies**:
    To runt the game, the following libraries must be installed:
    ```bash
    pip install pygame gensim scikit-learn sentence-transformers numpy kagglehub
    ```
 
-2**Word2Vec Model**:
+**Word2Vec Model**:
     
    - The `GoogleNews-vectors-negative300.bin` file is required for the **W2V_Game**. When running the scrip for the **W2V_game**, the model is automaticly downloaded using the following:
      ```python
