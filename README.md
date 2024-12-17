@@ -24,7 +24,7 @@ This project contains two version of a crafting game:
      ```
    - After downloading, update the `path` variable in `W2V_game.py` to point to the local file.
    - If problem arises, the model can be downloaded manually from: https://www.kaggle.com/datasets/leadbest/googlenewsvectorsnegative300
-    BE AWARE THAT THIS DOWNLOADS THE GoogleNews-vectors-negative300 MODEL WHICH TAKES UP 3.64 GB
+   - BE AWARE THAT THE GoogleNews-vectors-negative300 MODEL WHICH TAKES UP 3.64 GB
 
 
 ---
