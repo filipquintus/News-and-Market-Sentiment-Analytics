@@ -8,8 +8,8 @@ from sentence_transformers import SentenceTransformer
 ST_embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
 
 # loading words and embeddings
-embedded_words = np.load("word_list/embedded_words_ST.npy")
-embeddings = np.load("word_list/embeddings_ST.npy")
+embedded_words = np.load("word_list/embedded element lists/embedded_words_ST.npy")
+embeddings = np.load("word_list/embedded element lists/embeddings_ST.npy")
 
 # Initialize Pygame
 pygame.init()
