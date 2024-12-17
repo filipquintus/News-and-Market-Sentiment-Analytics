@@ -1,7 +1,8 @@
 ## **News and Market Sentiment Analysis - Exam**
 
-This project contains two version of a crafting game:
-**W2V_game** which is build on a Word2Vec-model and **ST_game** which is build on a SentenceTransformer model.
+This project contains two version of a crafting game as a part of the exam in the course *DS821: News and Market Sentiment Analytics*:
+ - **W2V_game** which is build on a Word2Vec-model
+ - **ST_game** which is build on a SentenceTransformer-model.
 
 
 ---
