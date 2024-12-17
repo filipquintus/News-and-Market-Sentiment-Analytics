@@ -8,7 +8,6 @@ from functions import find_similar_embedding_W2V
 
 # BE AWARE THAT THIS DOWNLOADS THE GoogleNews-vectors-negative300 MODEL WHICH TAKES UP 3.64 GB
 # If problem arises, the model can be downloaded manually from: https://www.kaggle.com/datasets/leadbest/googlenewsvectorsnegative300
-
 path = kagglehub.dataset_download("leadbest/googlenewsvectorsnegative300")
 print(path)
 
