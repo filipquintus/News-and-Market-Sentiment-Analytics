@@ -11,7 +11,6 @@ from functions import find_similar_embedding_W2V
 path = kagglehub.dataset_download("leadbest/googlenewsvectorsnegative300")
 print(path)
 
-
 W2V_embedding = KeyedVectors.load_word2vec_format(path, binary=True)
 
 

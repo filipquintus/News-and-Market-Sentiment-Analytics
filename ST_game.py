@@ -22,6 +22,7 @@ GREY = (230, 230, 230)
 RED = (232, 93, 93)
 BLACK = (0, 0, 0)
 
+
 # screen
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Craft game - SentenceTransformer")
