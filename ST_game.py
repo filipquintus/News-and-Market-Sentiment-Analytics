@@ -1,8 +1,7 @@
 import pygame
 import numpy as np
-from functions import find_similar_embedding_ST
 from sentence_transformers import SentenceTransformer
-
+from functions import find_similar_embedding_ST
 
 # Loading embedding model
 ST_embedding_model = SentenceTransformer('all-MiniLM-L6-v2')

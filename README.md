@@ -1,69 +1,54 @@
-# Project: Semantic Word Combination Games
+## **News and Market Sentiment Analysis - Exam**
 
-This project contains two interactive games, **ST_Game** and **W2V_Game**, that allow players to combine words from an inventory to generate new words based on semantic embeddings. Each game utilizes a different embedding model: **SentenceTransformer** and **Word2Vec**, respectively.
+This project contains two version of a crafting game:
+**W2V_game** which is build on a Word2Vec-model and **ST_game** which is build on a SentenceTransformer model.
 
----
-
-## Files Overview
-
-### 1. `functions.py`
-- Contains utility functions to compute similar embeddings:
-  - `find_similar_embedding_W2V`: Uses a Word2Vec model.
-  - `find_similar_embedding_ST`: Uses a SentenceTransformer model.
-
-### 2. `ST_game.py`
-- Implements a game using the SentenceTransformer model.
-- Features include:
-  - Combining inventory words to create new words.
-  - GUI built with Pygame.
-  - Embedding files used: `embedded_words_ST.npy`, `embeddings_ST.npy`.
-
-### 3. `W2V_game.py`
-- Implements a game using the Word2Vec model.
-- Features include:
-  - Combining inventory words to create new words.
-  - GUI built with Pygame.
-  - Embedding files used: `embedded_words_W2V.npy`, `embeddings_W2V.npy`.
-  - Pre-trained Word2Vec model file: `GoogleNews-vectors-negative300.bin`.
-
-### 4. Required Data Files
-- **SentenceTransformer Game**:
-  - `embedded_words_ST.npy`
-  - `embeddings_ST.npy`
-- **Word2Vec Game**:
-  - `embedded_words_W2V.npy`
-  - `embeddings_W2V.npy`
-  - `GoogleNews-vectors-negative300.bin`
 
 ---
-## Prerequisites
 
-1. **Python Version**: Ensure Python 3.8 or later is installed.
-2. **Dependencies**:
-   Install the required Python packages using pip:
+## **Prerequisites**
+
+
+1**Dependencies**:
+   To runt the game, the following libraries must be installed:
    ```bash
-   pip install pygame gensim scikit-learn sentence-transformers numpy
+   pip install pygame gensim scikit-learn sentence-transformers numpy kagglehub
    ```
-3. **Data Files**: Ensure all .npy embedding files are in the same directory as the scripts.
-Update the path variable in W2V_game.py to point to the GoogleNews-vectors-negative300.bin file.
----
 
-## Game Descriptions
+2**Word2Vec Model**:
+    
+   - The `GoogleNews-vectors-negative300.bin` file is required for the **W2V_Game**. When running the scrip for the **W2V_game**, the model is automaticly downloaded using the following:
+     ```python
+     import kagglehub
+     path = kagglehub.dataset_download("leadbest/googlenewsvectorsnegative300")
+     ```
+   - After downloading, update the `path` variable in `W2V_game.py` to point to the local file.
+   - If problem arises, the model can be downloaded manually from: https://www.kaggle.com/datasets/leadbest/googlenewsvectorsnegative300
+    BE AWARE THAT THIS DOWNLOADS THE GoogleNews-vectors-negative300 MODEL WHICH TAKES UP 3.64 GB
 
-### 1. ST_Game (SentenceTransformer)
-- Combines inventory words using SentenceTransformer embeddings to create new words.
-- **Features**:
-  - Inventory system to manage items (e.g., "water," "fire").
-  - Semantic combination of words using SentenceTransformer.
-  - Interactive GUI for selecting and combining words.
-
-### 2. W2V_Game (Word2Vec)
-- Combines inventory words using Word2Vec embeddings to create new words.
-- **Features**:
-  - Inventory system to manage items (e.g., "earth," "wind").
-  - Semantic combination of words using Word2Vec.
-  - Interactive GUI for selecting and combining words.
 
 ---
+
+## **How to Run the Games**
+
+1. **Download the Required Files**:
+   - Ensure all `.npy` data files and the Word2Vec model are downloaded and accessible in the project directory.
+   
+2. **Run the SentenceTransformer Game**:
+   ```bash
+   python ST_game.py
+   ```
+
+3. **Run the Word2Vec Game**:
+   ```bash
+   python W2V_game.py
+   ```
+
+
+## **Acknowledgments**
+- **Pygame**: Used for building the GUI.
+- **Gensim**: For Word2Vec model operations.
+- **Sentence-Transformers**: For SentenceTransformer embeddings.
+- **Kaggle**: Source for pre-trained Word2Vec embeddings.
 
 

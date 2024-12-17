@@ -10,6 +10,7 @@ from functions import find_similar_embedding_W2V
 # If problem arises, the model can be downloaded manually from: https://www.kaggle.com/datasets/leadbest/googlenewsvectorsnegative300
 path = kagglehub.dataset_download("leadbest/googlenewsvectorsnegative300")
 print(path)
+# After downloading, update the path to point to a local file.
 
 W2V_embedding = KeyedVectors.load_word2vec_format(path, binary=True)
 
